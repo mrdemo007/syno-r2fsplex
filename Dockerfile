@@ -25,7 +25,7 @@ RUN apt-get update
 RUN apt-get install -y curl sudo wget xmlstarlet uuid-runtime curl fuse-dev g++ make tar fuse libstdc++ bash
 
 # Execute build rar2fs
-WORKDIR /tmp/unrar
+WORKDIR /tmp
 RUN make lib; make install-lib
 WORKDIR /tmp/rar2fs
 RUN ./configure --with-unrar=../unrar --with-unrar-lib=/usr/lib/
