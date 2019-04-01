@@ -20,7 +20,7 @@ ENTRYPOINT ["/init"]
 
 # Update and get dependencies
 RUN apt update \
-    && apt upgrade \
+    && apt upgrade -y \
     && apt install -y xmlstarlet uuid-runtime curl libfuse-dev g++ make fuse \
 
 # Install S6 overlay
