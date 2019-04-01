@@ -39,7 +39,7 @@ RUN mkdir -p /tmp/rar2fs/ \
     | tar --strip-components 1 -xzC /tmp/rar2fs \
     && cd /tmp/rar2fs \
     && ./configure --with-unrar=/tmp/unrar --with-unrar-lib=/usr/lib/ \
-    && make
+    && make \
     && cp /tmp/rar2fs/rar2fs /usr/local/bin/rar2fs
 #    && /tmp/rar2fs/configure --with-unrar=/tmp/unrar --with-unrar-lib=/usr/lib/ \
 #    && make -C /tmp/rar2fs
