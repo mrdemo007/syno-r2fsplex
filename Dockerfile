@@ -47,7 +47,7 @@ RUN usermod -G users plex
 # Install plex
 RUN mkdir -p /tmp/plex/ \
     && curl -o /tmp/plex/plexserver.deb -SL $PLEX_INSTALL \ 
-    && dpkg -i /tmp/plex/plexmediaserver.deb
+    && dpkg -i /tmp/plex/plexserver.deb
 
 # Setup directories
 RUN mkdir -p /config /transcode /data /nomorerar
