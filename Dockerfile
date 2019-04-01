@@ -11,7 +11,7 @@ ENV VERSION=latest CHANGE_DIR_RIGHTS="false" CHANGE_CONFIG_DIR_OWNERSHIP="true" 
 
 # Update and get dependencies
 RUN apt-get update
-RUN apt-get install -y curl sudo wget xmlstarlet uuid-runtime curl fuse-dev g++ make tar fuse libstdc++ bash
+RUN apt-get install -y curl sudo wget xmlstarlet uuid-runtime curl libfuse-dev g++ make tar fuse libstdc++ bash
 
 ENTRYPOINT ["/init"]
 
