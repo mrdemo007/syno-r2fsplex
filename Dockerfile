@@ -31,7 +31,7 @@ RUN mkdir -p /tmp/rar2fs/ \
     && curl -SL https://github.com/hasse69/rar2fs/releases/download/v$RAR2FS_VERSION/rar2fs-$RAR2FS_VERSION.tar.gz \
     | tar --strip-components 1 -xzC /tmp/rar2fs \
     && cd /tmp/rar2fs \
-    && ./configure --with-unrar=/tmp/unrar --with-unrar-lib=/usr/lib/ \\
+    && ./configure --with-unrar=/tmp/unrar --with-unrar-lib=/usr/lib/ \
     && make
     && cp /tmp/rar2fs/rar2fs /usr/local/bin/rar2fs
 #    && /tmp/rar2fs/configure --with-unrar=/tmp/unrar --with-unrar-lib=/usr/lib/ \
