@@ -21,21 +21,9 @@ RUN tar xzvf "/tmp/unrarsrc-$RAR_VERSION.tar.gz"
 RUN tar --strip-components 1 -xzvf "rar2fs-$RAR2FS_VERSION.tar.gz -C /tmp/rar2fs 
 
 # Update and get dependencies
-    apt-get update
-    apt-get install -y \
-      curl \
-      sudo \
-      wget \
-      xmlstarlet \
-      uuid-runtime \
-      curl \
-      fuse-dev \
-      g++ \
-      make \
-      tar \
-      fuse \
-      libstdc++ 
-      
+RUN apt-get update
+RUN apt-get install -y curl sudo wget xmlstarlet uuid-runtime curl fuse-dev g++ make tar fuse libstdc++ bash
+
 # Execute build rar2fs
 WORKDIR /unrar
 RUN make lib; make install-lib
@@ -46,26 +34,24 @@ COPY /rar2fs/rar2fs /usr/local/bin/rar2fs
 
 
 # Add user
-    useradd -U -d /config -s /bin/false plex
-    usermod -G users plex
+RUN useradd -U -d /config -s /bin/false plex
+RUN usermod -G users plex
 
 # Setup directories
-    mkdir -p /config /transcode /data
-    rar2fs -f -o allow_other -o auto_unmount --seek-length=1 /data /nomorerar
+RUN mkdir -p /config /transcode /data
 
 # Cleanup
-    apt-get -y autoremove
-    apt-get -y clean
-    rm -rf /var/lib/apt/lists/* 
-    rm -rf /tmp/*
-    rm -rf var/tmp/*
+RUN apt-get -y autoremove
+RUN apt-get -y clean
+RUN rm -rf /var/lib/apt/lists/* 
+RUN rm -rf /tmp/*
+RUN rm -rf var/tmp/*
 
 EXPOSE 32400/tcp 3005/tcp 8324/tcp 32469/tcp 1900/udp 32410/udp 32412/udp 32413/udp 32414/udp
 VOLUME /config /transcode
 
-ENV VERSION=latest \
-    CHANGE_DIR_RIGHTS="false" \
-    CHANGE_CONFIG_DIR_OWNERSHIP="true" \
-    HOME="/config"
+ENV VERSION=latest CHANGE_DIR_RIGHTS="false" CHANGE_CONFIG_DIR_OWNERSHIP="true" HOME="/config"
 
 COPY root/ /
+
+#rar2fs -f -o allow_other -o auto_unmount --seek-length=1 /data /nomorerar
