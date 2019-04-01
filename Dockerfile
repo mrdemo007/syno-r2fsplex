@@ -21,7 +21,7 @@ ENTRYPOINT ["/init"]
 # Update and get dependencies
 RUN apt update \
     && apt upgrade -y \
-    && apt install -y xmlstarlet uuid-runtime curl libfuse-dev g++ make fuse \
+    && apt install -y avahi-daemon dbus xmlstarlet uuid-runtime curl libfuse-dev g++ make fuse \
 
 # Install S6 overlay
     && curl -SL https://github.com/just-containers/s6-overlay/releases/download/v$S6_OVERLAY_VERSION/s6-overlay-amd64.tar.gz \
