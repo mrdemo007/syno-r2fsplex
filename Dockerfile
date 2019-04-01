@@ -8,7 +8,14 @@ ARG S6_OVERLAY_VERSION=1.22.0.0
 ARG PLEX_INSTALL=https://plex.tv/downloads/latest/1?channel=8&build=linux-ubuntu-x86_64&distro=ubuntu
 
 ENV DEBIAN_FRONTEND="noninteractive" TERM="xterm"
-ENV VERSION=latest CHANGE_DIR_RIGHTS="false" CHANGE_CONFIG_DIR_OWNERSHIP="true" HOME="/config"
+ENV VERSION=latest
+ENV CHANGE_DIR_RIGHTS="false"
+ENV CHANGE_CONFIG_DIR_OWNERSHIP="true"
+ENV HOME="/config"
+ENV PLEX_MEDIA_SERVER_HOME="/usr/lib/plexmediaserver"
+ENV PLEX_MEDIA_SERVER_INFO_DEVICE=docker
+ENV PLEX_MEDIA_SERVER_MAX_PLUGIN_PROCS="6"
+ENV PLEX_MEDIA_SERVER_USER=plex
 
 # Update and get dependencies
 RUN apt-get update
@@ -54,10 +61,11 @@ RUN apt-get -y clean
 RUN rm -rf /var/lib/apt/lists/* 
 RUN rm -rf /tmp/*
 RUN rm -rf var/tmp/*
+RUN rm -rf /etc/default/plexmediaserver
 
 EXPOSE 32400/tcp 3005/tcp 8324/tcp 32469/tcp 1900/udp 32410/udp 32412/udp 32413/udp 32414/udp
 VOLUME /config /transcode
 
-#COPY root/ /
+COPY root/ /
 
 #rar2fs -f -o allow_other -o auto_unmount --seek-length=1 /data /nomorerar
