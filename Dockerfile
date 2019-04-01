@@ -9,6 +9,10 @@ ARG S6_OVERLAY_VERSION=1.22.0.0
 ENV DEBIAN_FRONTEND="noninteractive" TERM="xterm"
 ENV VERSION=latest CHANGE_DIR_RIGHTS="false" CHANGE_CONFIG_DIR_OWNERSHIP="true" HOME="/config"
 
+# Update and get dependencies
+RUN apt-get update
+RUN apt-get install -y curl sudo wget xmlstarlet uuid-runtime curl fuse-dev g++ make tar fuse libstdc++ bash
+
 ENTRYPOINT ["/init"]
 
 # Install S6 overlay
@@ -28,10 +32,6 @@ RUN mkdir -p /tmp/rar2fs/ \
     && /tmp/rar2fs/configure --with-unrar=/tmp/unrar --with-unrar-lib=/usr/lib/ \
     && make -C /tmp/rar2fs
 COPY /tmp/rar2fs/rar2fs /usr/local/bin/rar2fs
-
-# Update and get dependencies
-RUN apt-get update
-RUN apt-get install -y curl sudo wget xmlstarlet uuid-runtime curl fuse-dev g++ make tar fuse libstdc++ bash
 
 # Add user
 RUN useradd -U -d /config -s /bin/false plex
