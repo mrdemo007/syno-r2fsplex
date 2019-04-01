@@ -53,7 +53,7 @@ RUN useradd -U -d /config -s /bin/false plex
 RUN usermod -G users plex
 
 # Setup directories
-RUN mkdir -p /config /transcode /data
+RUN mkdir -p /config /transcode /data /nomorerar
 
 # Cleanup
 RUN apt-get -y autoremove
@@ -68,5 +68,3 @@ CMD sleep 60; /usr/local/bin/rar2fs /nomorerar /data
 VOLUME /config /transcode /nomorerar
 
 COPY root/ /
-
-#rar2fs -f -o allow_other -o auto_unmount --seek-length=1 /data /nomorerar
