@@ -34,25 +34,25 @@ RUN    ls -l /tmp/rar2fs/
 #    && /tmp/rar2fs/configure --with-unrar=/tmp/unrar --with-unrar-lib=/usr/lib/ \
 #    && make -C /tmp/rar2fs
 
-##COPY /tmp/rar2fs/rar2fs /usr/local/bin/rar2fs
+COPY /tmp/rar2fs/rar2fs /usr/local/bin/rar2fs
 
 # Add user
-##RUN useradd -U -d /config -s /bin/false plex
-##RUN usermod -G users plex
+RUN useradd -U -d /config -s /bin/false plex
+RUN usermod -G users plex
 
 # Setup directories
-##RUN mkdir -p /config /transcode /data
+RUN mkdir -p /config /transcode /data
 
 # Cleanup
-##RUN apt-get -y autoremove
-##RUN apt-get -y clean
-##RUN rm -rf /var/lib/apt/lists/* 
-##RUN rm -rf /tmp/*
-##RUN rm -rf var/tmp/*
+RUN apt-get -y autoremove
+RUN apt-get -y clean
+RUN rm -rf /var/lib/apt/lists/* 
+RUN rm -rf /tmp/*
+RUN rm -rf var/tmp/*
 
-##EXPOSE 32400/tcp 3005/tcp 8324/tcp 32469/tcp 1900/udp 32410/udp 32412/udp 32413/udp 32414/udp
-##VOLUME /config /transcode
+EXPOSE 32400/tcp 3005/tcp 8324/tcp 32469/tcp 1900/udp 32410/udp 32412/udp 32413/udp 32414/udp
+VOLUME /config /transcode
 
-##COPY root/ /
+COPY root/ /
 
 #rar2fs -f -o allow_other -o auto_unmount --seek-length=1 /data /nomorerar
