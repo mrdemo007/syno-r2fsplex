@@ -39,16 +39,15 @@ RUN mkdir -p /tmp/rar2fs/ \
     && ./configure --with-unrar=/tmp/unrar --with-unrar-lib=/usr/lib/ \
     && make \
     && cp /tmp/rar2fs/rar2fs /usr/local/bin/rar2fs
-#    && /tmp/rar2fs/configure --with-unrar=/tmp/unrar --with-unrar-lib=/usr/lib/ \
-#    && make -C /tmp/rar2fs
 
-RUN mkdir -p /tmp/plex/ \
-    && curl -o /tmp/plex/plexserver.deb -SL $PLEX_INSTALL \ 
-    && dpkg -i /tmp/plexmediaserver.deb && \
-
-# Add user
+# Add  plex user
 RUN useradd -U -d /config -s /bin/false plex
 RUN usermod -G users plex
+
+# Install plex
+RUN mkdir -p /tmp/plex/ \
+    && curl -o /tmp/plex/plexserver.deb -SL $PLEX_INSTALL \ 
+    && dpkg -i /tmp/plexmediaserver.deb
 
 # Setup directories
 RUN mkdir -p /config /transcode /data /nomorerar
