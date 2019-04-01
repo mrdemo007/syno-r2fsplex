@@ -5,6 +5,7 @@ FROM ubuntu:18.04
 ARG RAR_VERSION=5.7.3
 ARG RAR2FS_VERSION=1.27.2
 ARG S6_OVERLAY_VERSION=1.22.0.0
+ARG PLEX_INSTALL="https://plex.tv/downloads/latest/1?channel=8&build=linux-ubuntu-x86_64&distro=ubuntu" \
 
 ENV DEBIAN_FRONTEND="noninteractive" TERM="xterm"
 ENV VERSION=latest CHANGE_DIR_RIGHTS="false" CHANGE_CONFIG_DIR_OWNERSHIP="true" HOME="/config"
@@ -29,9 +30,16 @@ RUN mkdir -p /tmp/unrar/ \
 RUN mkdir -p /tmp/rar2fs/ \
     && curl -SL https://github.com/hasse69/rar2fs/releases/download/v$RAR2FS_VERSION/rar2fs-$RAR2FS_VERSION.tar.gz \
     | tar --strip-components 1 -xzC /tmp/rar2fs \
-    && cd /tmp/rar2fs; ./configure --with-unrar=/tmp/unrar --with-unrar-lib=/usr/lib/; make; cp /tmp/rar2fs/rar2fs /usr/local/bin/rar2fs
+    && cd /tmp/rar2fs \
+    && ./configure --with-unrar=/tmp/unrar --with-unrar-lib=/usr/lib/ \\
+    && make
+    && cp /tmp/rar2fs/rar2fs /usr/local/bin/rar2fs
 #    && /tmp/rar2fs/configure --with-unrar=/tmp/unrar --with-unrar-lib=/usr/lib/ \
 #    && make -C /tmp/rar2fs
+
+RUN mkdir -p /tmp/plex/ \
+    && curl -o /tmp/plex/plexserver.deb -SL $PLEX_INSTALL \ 
+    && dpkg -i /tmp/plexmediaserver.deb && \
 
 # Add user
 RUN useradd -U -d /config -s /bin/false plex
