@@ -17,7 +17,7 @@ ENTRYPOINT ["/init"]
 # Execute build image
 RUN mkdir /tmp/rar2fs
 RUN tar xzf "/tmp/s6-overlay-amd64.tar.gz" -C /
-RUN tar xzvf "/tmp/unrarsrc-$RAR_VERSION.tar.gz"
+RUN tar xzvf "/tmp/unrarsrc-$RAR_VERSION.tar.gz" -C /tmp
 RUN tar --strip-components 1 -xzvf "rar2fs-$RAR2FS_VERSION.tar.gz -C /tmp/rar2fs 
 
 # Update and get dependencies
