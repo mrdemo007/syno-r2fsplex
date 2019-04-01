@@ -4,34 +4,34 @@ FROM ubuntu:18.04
 
 ARG RAR_VERSION=5.7.3
 ARG RAR2FS_VERSION=1.27.2
+ARG S6_OVERLAY_VERSION=1.22.0.0
 
 ENV DEBIAN_FRONTEND="noninteractive" TERM="xterm"
-
-# Install required packages
-ADD ["https://github.com/just-containers/s6-overlay/releases/download/v1.17.2.0/s6-overlay-amd64.tar.gz", "/tmp/"]
-ADD ["https://www.rarlab.com/rar/unrarsrc-$RAR_VERSION.tar.gz", "/tmp/"]
-ADD ["https://github.com/hasse69/rar2fs/releases/download/v$RAR2FS_VERSION/rar2fs-$RAR2FS_VERSION.tar.gz", "/tmp/"]
+ENV VERSION=latest CHANGE_DIR_RIGHTS="false" CHANGE_CONFIG_DIR_OWNERSHIP="true" HOME="/config"
 
 ENTRYPOINT ["/init"]
 
-# Execute build image
-RUN mkdir /tmp/rar2fs
-RUN tar xzf "/tmp/s6-overlay-amd64.tar.gz" -C /
-RUN tar xzvf "/tmp/unrarsrc-$RAR_VERSION.tar.gz" -C /tmp
-RUN tar --strip-components 1 -xzvf "rar2fs-$RAR2FS_VERSION.tar.gz" -C /tmp/rar2fs 
+# Install S6 overlay
+RUN curl -SL https://github.com/just-containers/s6-overlay/releases/download/v$S6_OVERLAY_VERSION/s6-overlay-amd64.tar.gz \
+    | tar xzC /
+
+# Execute build rar2fs
+RUN mkdir -p /tmp/unrar/ \
+    && curl -SL https://www.rarlab.com/rar/unrarsrc-$RAR_VERSION.tar.gz \
+    | tar -xzC /tmp \
+    && make -C /tmp/unrar lib \
+    && make -C /tmp/unrar install-lib
+
+RUN mkdir -p /tmp/rar2fs/ \
+    && curl -SL https://github.com/hasse69/rar2fs/releases/download/v$RAR2FS_VERSION/rar2fs-$RAR2FS_VERSION.tar.gz \
+    | tar --strip-components 1 -xzC /tmp/rar2fs \
+    && /tmp/rar2fs/configure --with-unrar=/tmp/unrar --with-unrar-lib=/usr/lib/ \
+    && make -C /tmp/rar2fs
+COPY /tmp/rar2fs/rar2fs /usr/local/bin/rar2fs
 
 # Update and get dependencies
 RUN apt-get update
 RUN apt-get install -y curl sudo wget xmlstarlet uuid-runtime curl fuse-dev g++ make tar fuse libstdc++ bash
-
-# Execute build rar2fs
-WORKDIR /tmp
-RUN make lib; make install-lib
-WORKDIR /tmp/rar2fs
-RUN ./configure --with-unrar=../unrar --with-unrar-lib=/usr/lib/
-RUN make
-COPY /tmp/rar2fs/rar2fs /usr/local/bin/rar2fs
-
 
 # Add user
 RUN useradd -U -d /config -s /bin/false plex
@@ -49,8 +49,6 @@ RUN rm -rf var/tmp/*
 
 EXPOSE 32400/tcp 3005/tcp 8324/tcp 32469/tcp 1900/udp 32410/udp 32412/udp 32413/udp 32414/udp
 VOLUME /config /transcode
-
-ENV VERSION=latest CHANGE_DIR_RIGHTS="false" CHANGE_CONFIG_DIR_OWNERSHIP="true" HOME="/config"
 
 COPY root/ /
 
