@@ -1,5 +1,3 @@
-#Do not use yet under construction / merge
-
 FROM ubuntu:18.04
 
 ARG RAR_VERSION=5.7.3
