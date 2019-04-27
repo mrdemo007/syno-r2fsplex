@@ -55,7 +55,7 @@ RUN apt update \
     && rm -rf /var/lib/apt/lists/* \ 
     && rm -rf /tmp/* \
     && rm -rf var/tmp/* \
-    && rm -rf /etc/default/plexmediaserver/*
+    && rm -rf /etc/default/plexmediaserver/* \
     && echo $BUILDDATE >> /builddate.txt
 EXPOSE 32400/tcp 3005/tcp 8324/tcp 32469/tcp 1900/udp 32410/udp 32412/udp 32413/udp 32414/udp
 CMD /usr/local/bin/rar2fs -f -o ro,allow_other -o auto_unmount --seek-length=1 /nomorerar /data
