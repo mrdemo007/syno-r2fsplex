@@ -1,25 +1,9 @@
+ARG BUILDDATE=20190427
 FROM ubuntu:18.04
-
-ARG RAR_VERSION=5.7.3
-ARG RAR2FS_VERSION=1.27.2
-ARG S6_OVERLAY_VERSION=1.22.0.0
-ARG PLEX_INSTALL=https://plex.tv/downloads/latest/1?channel=8&build=linux-ubuntu-x86_64&distro=ubuntu
-ARG FUSE_THREAD_STACK=320000
-
-ENV DEBIAN_FRONTEND="noninteractive"
-ENV TERM="xterm" 
-ENV VERSION=latest
-ENV CHANGE_DIR_RIGHTS="false"
-ENV CHANGE_CONFIG_DIR_OWNERSHIP="true"
-ENV HOME="/config"
-ENV PLEX_MEDIA_SERVER_HOME="/usr/lib/plexmediaserver"
-ENV PLEX_MEDIA_SERVER_INFO_DEVICE=docker
-ENV PLEX_MEDIA_SERVER_MAX_PLUGIN_PROCS="6"
-ENV PLEX_MEDIA_SERVER_USER=plex
-ENV FUSE_THREAD_STACK $FUSE_THREAD_STACK
+ARG RAR_VERSION=5.7.3 RAR2FS_VERSION=1.27.2 S6_OVERLAY_VERSION=1.22.0.0 ARG PLEX_INSTALL=https://plex.tv/downloads/latest/1?channel=8&build=linux-ubuntu-x86_64&distro=ubuntu FUSE_THREAD_STACK=320000
+ENV DEBIAN_FRONTEND="noninteractive" TERM="xterm"  VERSION=latest CHANGE_DIR_RIGHTS="false" CHANGE_CONFIG_DIR_OWNERSHIP="true" HOME="/config" PLEX_MEDIA_SERVER_HOME="/usr/lib/plexmediaserver" PLEX_MEDIA_SERVER_INFO_DEVICE=docker PLEX_MEDIA_SERVER_MAX_PLUGIN_PROCS="6" PLEX_MEDIA_SERVER_USER=plex FUSE_THREAD_STACK $FUSE_THREAD_STACK
 
 ENTRYPOINT ["/init"]
-
 
 # Update and get dependencies
 RUN apt update \
@@ -57,6 +41,7 @@ RUN apt update \
     && rm -rf /tmp/* \
     && rm -rf var/tmp/* \
     && rm -rf /etc/default/plexmediaserver/*
+    && echo $BUILDDATE >> /builddate.txt
 EXPOSE 32400/tcp 3005/tcp 8324/tcp 32469/tcp 1900/udp 32410/udp 32412/udp 32413/udp 32414/udp
-CMD /usr/local/bin/rar2fs -f -o ro,allow_other -o auto_unmount --seek-length=1 /nomrerar /data
+CMD /usr/local/bin/rar2fs -f -o ro,allow_other -o auto_unmount --seek-length=1 /nomorerar /data
 VOLUME /config /transcode /nomorerar
