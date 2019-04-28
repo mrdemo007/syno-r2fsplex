@@ -50,7 +50,7 @@ RUN apt update \
 # Setup directories
     && mkdir -p /config /transcode /data /nomorerar \
 # Cleanup
-    && apt -y remove gcc make curl \
+    && apt -y remove gcc make curl manpages \
     && apt -y autoremove \
     && apt -y clean \
     && rm -rf /var/lib/apt/lists/* \ 
