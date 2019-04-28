@@ -1,3 +1,4 @@
+# 18.04 is the latest that i can get working for now!
 FROM ubuntu:18.04
 
 ARG BUILDDATE=20190428
