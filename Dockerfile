@@ -51,7 +51,7 @@ RUN apt update \
 # Setup directories
     && mkdir -p /config /transcode /data /nomorerar \
 # Cleanup
-    && apt -y remove gcc make curl manpages \
+    && apt -y remove gcc make curl manpages libc-dev-bin libsepol1-dev linux-libc-dev geoip-database multiarch-support \
     && apt -y autoremove \
     && apt -y clean \
     && rm -rf /var/lib/apt/lists/* \ 
