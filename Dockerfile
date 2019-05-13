@@ -4,9 +4,8 @@ FROM ubuntu:18.04
 ARG BUILDDATE=20190513
 ARG RAR_VERSION=5.7.3
 ARG RAR2FS_VERSION=1.27.2
-ARG S6_OVERLAY_VERSION=1.22.0.0
+ARG S6_OVERLAY_VERSION=1.22.1.0
 ARG PLEX_INSTALL=https://plex.tv/downloads/latest/1?channel=8&build=linux-ubuntu-x86_64&distro=ubuntu
-ARG FUSE_THREAD_STACK=320000
 ENV DEBIAN_FRONTEND=noninteractive \
     TERM=xterm \
     VERSION=$BUILDDATE \
@@ -17,7 +16,7 @@ ENV DEBIAN_FRONTEND=noninteractive \
     PLEX_MEDIA_SERVER_INFO_DEVICE=docker \
     PLEX_MEDIA_SERVER_MAX_PLUGIN_PROCS=6 \
     PLEX_MEDIA_SERVER_USER=plex \
-    USE_THREAD_STACK=$FUSE_THREAD_STACK
+    FUSE_THREAD_STACK=320000
 
 ENTRYPOINT ["/init"]
 
@@ -51,7 +50,7 @@ RUN apt update \
 # Setup directories
     && mkdir -p /config /transcode /data /nomorerar \
 # Cleanup
-    && apt -y remove gcc make curl manpages libc-dev-bin libsepol1-dev linux-libc-dev geoip-database multiarch-support \
+    && apt -y remove gcc make curl manpages libc-dev-bin libsepol1-dev linux-libc-dev geoip-database multiarch-support bash \
     && apt -y autoremove \
     && apt -y clean \
     && rm -rf /var/lib/apt/lists/* \ 
