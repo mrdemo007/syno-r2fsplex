@@ -23,7 +23,7 @@ ENTRYPOINT ["/init"]
 # Update and get dependencies
 RUN apt update \
     && apt upgrade -y \
-    && apt install -y avahi-daemon dbus xmlstarlet uuid-runtime curl libfuse-dev g++ make fuse bash \
+    && apt install -y avahi-daemon dbus xmlstarlet uuid-runtime curl libfuse-dev g++ make fuse \
 # Install S6 overlay
     && curl -SL https://github.com/just-containers/s6-overlay/releases/download/v$S6_OVERLAY_VERSION/s6-overlay-amd64.tar.gz \
     | tar xzC / \
@@ -50,7 +50,7 @@ RUN apt update \
 # Setup directories
     && mkdir -p /config /transcode /data /nomorerar \
 # Cleanup
-    && apt -y remove gcc make curl manpages libc-dev-bin libsepol1-dev linux-libc-dev geoip-database multiarch-support bash \
+    && apt -y remove gcc make curl manpages libc-dev-bin libsepol1-dev linux-libc-dev geoip-database multiarch-support \
     && apt -y autoremove \
     && apt -y clean \
     && rm -rf /var/lib/apt/lists/* \ 
