@@ -24,7 +24,7 @@ ENTRYPOINT ["/init"]
 # Update and get dependencies
 RUN apt update \
     && apt upgrade -y \
-    && apt install -y avahi-daemon dbus xmlstarlet uuid-runtime curl libfuse-dev g++ make fuse \
+    && apt install -y avahi-daemon dbus xmlstarlet uuid-runtime curl libfuse-dev g++ make fuse bash \
 # Install S6 overlay
     && curl -SL https://github.com/just-containers/s6-overlay/releases/download/v$S6_OVERLAY_VERSION/s6-overlay-amd64.tar.gz \
     | tar xzC / \
@@ -56,7 +56,7 @@ RUN apt update \
     && apt -y clean \
     && rm -rf /var/lib/apt/lists/* \ 
     && rm -rf /tmp/* \
-    && rm -rf var/tmp/* \
+    && rm -rf /var/tmp/* \
     && rm -rf /etc/default/plexmediaserver/*
 EXPOSE 32400/tcp 3005/tcp 8324/tcp 32469/tcp 1900/udp 32410/udp 32412/udp 32413/udp 32414/udp
 CMD /usr/local/bin/rar2fs -f -o ro,allow_other -o auto_unmount --seek-length=1 /nomorerar /data
