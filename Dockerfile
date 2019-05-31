@@ -1,5 +1,5 @@
 # 18.04 is the latest that i can get working for now!
-FROM ubuntu:19.04
+FROM ubuntu:18.10
 
 ARG BUILDDATE=20190531
 ARG RAR_VERSION=5.7.3
