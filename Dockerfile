@@ -1,6 +1,6 @@
 # builddate 20190603
 # 18.10 is the latest that i can get working for now!
-FROM ubuntu:18.10
+FROM ubuntu:19.04
 
 ARG RAR_VERSION=5.7.3
 ARG RAR2FS_VERSION=1.27.2
