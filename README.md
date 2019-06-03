@@ -9,3 +9,6 @@ needs:
  - /config mapped to folder containing the config for the container
  - /transcode folder to use during transcoding
  - /nomorerar for the folder containing your plex content.
+ - run with high privs.
+ 
+ Any optimization ideas welcome!
