@@ -4,7 +4,7 @@ FROM ubuntu:19.04
 
 ARG RAR_VERSION=5.7.3
 ARG RAR2FS_VERSION=1.27.2
-ARG S6_OVERLAY_VERSION=1.22.1.0
+#ARG S6_OVERLAY_VERSION=1.22.1.0
 ARG PLEX_INSTALL=https://plex.tv/downloads/latest/1?channel=8&build=linux-ubuntu-x86_64&distro=ubuntu
 ENV DEBIAN_FRONTEND=noninteractive \
     TERM=xterm \
@@ -25,8 +25,8 @@ RUN apt update \
     && apt upgrade -y \
     && apt install -y avahi-daemon dbus xmlstarlet uuid-runtime curl libfuse-dev g++ make fuse \
 # Install S6 overlay
-    && curl -SL https://github.com/just-containers/s6-overlay/releases/download/v$S6_OVERLAY_VERSION/s6-overlay-amd64.tar.gz \
-    | tar xzC / \
+#    && curl -SL https://github.com/just-containers/s6-overlay/releases/download/v$S6_OVERLAY_VERSION/s6-overlay-amd64.tar.gz \
+#    | tar xzC / \
 # Execute build rar2fs
     && mkdir -p /tmp/unrar/ \
     && curl -SL https://www.rarlab.com/rar/unrarsrc-$RAR_VERSION.tar.gz \
