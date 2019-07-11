@@ -1,4 +1,4 @@
-# builddate 20190603
+# builddate 20190711
 # 18.10 is the latest that i can get working for now!
 FROM ubuntu:18.04
 
@@ -8,13 +8,13 @@ ARG S6_OVERLAY_VERSION=1.22.1.0
 ARG PLEX_INSTALL=https://plex.tv/downloads/latest/1?channel=8&build=linux-ubuntu-x86_64&distro=ubuntu
 ENV DEBIAN_FRONTEND=noninteractive \
     TERM=xterm \
-    VERSION=20190603 \
+    VERSION=20190711 \
     CHANGE_DIR_RIGHTS=false \
     CHANGE_CONFIG_DIR_OWNERSHIP=true \
     HOME=/config \
     PLEX_MEDIA_SERVER_HOME=/usr/lib/plexmediaserver \
     PLEX_MEDIA_SERVER_INFO_DEVICE=docker \
-    PLEX_MEDIA_SERVER_MAX_PLUGIN_PROCS=6 \
+    PLEX_MEDIA_SERVER_MAX_PLUGIN_PROCS=10 \
     PLEX_MEDIA_SERVER_USER=plex \
     FUSE_THREAD_STACK=320000
 
