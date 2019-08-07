@@ -1,5 +1,4 @@
-# builddate 20190711
-# 18.10 is the latest that i can get working for now!
+# builddate 20190807
 FROM ubuntu:18.04
 
 ARG RAR_VERSION=5.7.3
