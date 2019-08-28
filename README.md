@@ -2,7 +2,7 @@
 
 Plex built for Synology containing rar2fs. (did my best to optimize size)
 
-OS: Ubuntu 18.10, Plex latest at container buildtime
+OS: Ubuntu 18.04, Plex latest at container buildtime
 
 
 needs:
