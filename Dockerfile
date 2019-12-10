@@ -38,6 +38,7 @@ RUN apt update \
     && cd /tmp/rar2fs \
     && ./configure --with-unrar=/tmp/unrar --with-unrar-lib=/usr/lib/ \
     && make \
+    && ls -l /tmp/rar2fs/*
     && cp /tmp/rar2fs/rar2fs /usr/local/bin/rar2fs \
 # Add  plex user
     && useradd -U -d /config -s /bin/false plex \
