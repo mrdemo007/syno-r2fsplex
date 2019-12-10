@@ -1,7 +1,7 @@
 # builddate 20191210
 FROM ubuntu:18.04
 
-ARG RAR_VERSION=5.7.3
+ARG RAR_VERSION=5.8.4
 ARG RAR2FS_VERSION=1.28.0
 ARG S6_OVERLAY_VERSION=1.22.1.0
 ARG PLEX_INSTALL=https://plex.tv/downloads/latest/1?channel=8&build=linux-ubuntu-x86_64&distro=ubuntu
