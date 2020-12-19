@@ -1,13 +1,13 @@
-# builddate 20200325
+# builddate 20201219
 FROM ubuntu:18.04
 
-ARG RAR_VERSION=5.9.1
-ARG RAR2FS_VERSION=1.29.0
-ARG S6_OVERLAY_VERSION=1.22.1.0
+ARG RAR_VERSION=6.0.3
+ARG RAR2FS_VERSION=1.29.3
+ARG S6_OVERLAY_VERSION=2.1.0.2
 ARG PLEX_INSTALL=https://plex.tv/downloads/latest/1?channel=8&build=linux-ubuntu-x86_64&distro=ubuntu
 ENV DEBIAN_FRONTEND=noninteractive \
     TERM=xterm \
-    VERSION=20200325 \
+    VERSION=20201219 \
     CHANGE_DIR_RIGHTS=false \
     CHANGE_CONFIG_DIR_OWNERSHIP=true \
     HOME=/config \
