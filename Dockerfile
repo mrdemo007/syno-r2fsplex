@@ -12,6 +12,7 @@ ENV DEBIAN_FRONTEND=noninteractive \
     CHANGE_CONFIG_DIR_OWNERSHIP=true \
     HOME=/config \
     PLEX_MEDIA_SERVER_HOME=/usr/lib/plexmediaserver \
+    PLEX_MEDIA_SERVER_APPLICATION_SUPPORT_DIR="/config/Library/Application Support" \
     PLEX_MEDIA_SERVER_INFO_DEVICE=docker \
     PLEX_MEDIA_SERVER_MAX_PLUGIN_PROCS=10 \
     PLEX_MEDIA_SERVER_USER=plex \
