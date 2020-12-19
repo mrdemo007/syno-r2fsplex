@@ -1,4 +1,4 @@
-# builddate 20201219-4
+# builddate 20201219-5
 FROM ubuntu:18.04
 
 ARG RAR_VERSION=6.0.3
@@ -6,15 +6,11 @@ ARG RAR2FS_VERSION=1.29.3
 ARG S6_OVERLAY_VERSION=2.1.0.2
 ARG PLEX_INSTALL=https://plex.tv/downloads/latest/1?channel=8&build=linux-ubuntu-x86_64&distro=ubuntu
 ENV DEBIAN_FRONTEND=noninteractive \
-    TERM=xterm \
-    VERSION=20201219-4 \
-    CHANGE_DIR_RIGHTS=false \
-    CHANGE_CONFIG_DIR_OWNERSHIP=true \
-    HOME=/config \
-    PLEX_MEDIA_SERVER_HOME=/usr/lib/plexmediaserver \
+    VERSION=20201219-5 \
+    PLEX_MEDIA_SERVER_HOME="/usr/lib/plexmediaserver" \
     PLEX_MEDIA_SERVER_APPLICATION_SUPPORT_DIR="/config/Library/Application Support" \
     PLEX_MEDIA_SERVER_INFO_DEVICE=docker \
-    PLEX_MEDIA_SERVER_MAX_PLUGIN_PROCS=10 \
+    PLEX_MEDIA_SERVER_MAX_PLUGIN_PROCS="10" \
     PLEX_MEDIA_SERVER_USER=plex \
     FUSE_THREAD_STACK=320000
 
@@ -57,8 +53,6 @@ RUN apt update \
     && rm -rf /tmp/* \
     && rm -rf /var/tmp/* \
     && rm -rf /etc/default/plexmediaserver/*
-
-COPY root/ /
 
 EXPOSE 32400/tcp 3005/tcp 8324/tcp 32469/tcp 1900/udp 32410/udp 32412/udp 32413/udp 32414/udp
 CMD /usr/local/bin/rar2fs -f -o ro,allow_other -o auto_unmount --seek-length=1 /nomorerar /data
