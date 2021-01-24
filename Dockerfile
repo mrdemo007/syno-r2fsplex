@@ -1,5 +1,5 @@
 # builddate 20210125-1
-FROM ubuntu:20.04
+FROM ubuntu:18.04
 
 ARG RAR_VERSION=6.0.3
 ARG RAR2FS_VERSION=1.29.3
@@ -55,5 +55,5 @@ RUN apt update \
     && rm -rf /etc/default/plexmediaserver/*
 
 EXPOSE 32400/tcp 3005/tcp 8324/tcp 32469/tcp 1900/udp 32410/udp 32412/udp 32413/udp 32414/udp
-CMD /usr/local/bin/rar2fs -f -o ro,allow_other -o auto_unmount --seek-length=1 /nomorerar /data
+CMD /usr/local/bin/rar2fs -f -o ro,allow_other -o auto_unmount --seek-length=1 /nomorerar /data; sleep 999999999999
 VOLUME /config /transcode /nomorerar
