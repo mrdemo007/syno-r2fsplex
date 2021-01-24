@@ -36,10 +36,10 @@ RUN apt update \
     && ./configure --with-unrar=/tmp/unrar --with-unrar-lib=/usr/lib/ \
     && make \
     && cp /tmp/rar2fs/src/rar2fs /usr/local/bin/rar2fs \
-    && echo "#!/bin/bash" >> /usr/local/bin/start_all.sh
-    && echo "/usr/local/bin/rar2fs -o ro,allow_other -o auto_unmount --seek-length=1 /nomorerar /data" >> /usr/local/bin/start_all.sh
-    && echo "sleep 99999999999" >> /usr/local/bin/start_all.sh
-    && chmod 755 /usr/local/bin/start_all.sh
+    && echo "#!/bin/bash" >> /usr/local/bin/start_all.sh \
+    && echo "/usr/local/bin/rar2fs -o ro,allow_other -o auto_unmount --seek-length=1 /nomorerar /data" >> /usr/local/bin/start_all.sh \
+    && echo "sleep 99999999999" >> /usr/local/bin/start_all.sh \
+    && chmod 755 /usr/local/bin/start_all.sh \
 # Add  plex user
     && useradd -U -d /config -s /bin/false plex \
     && usermod -G users plex \
