@@ -3,7 +3,7 @@ FROM ubuntu:18.04
 
 ARG RAR_VERSION=6.0.3
 ARG RAR2FS_VERSION=1.29.3
-ARG S6_OVERLAY_VERSION=2.1.0.2
+ARG S6_OVERLAY_VERSION=2.2.0.1
 ARG PLEX_INSTALL=https://plex.tv/downloads/latest/1?channel=8&build=linux-ubuntu-x86_64&distro=ubuntu
 ENV DEBIAN_FRONTEND=noninteractive \
     VERSION=20201219-5 \
