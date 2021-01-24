@@ -36,6 +36,10 @@ RUN apt update \
     && ./configure --with-unrar=/tmp/unrar --with-unrar-lib=/usr/lib/ \
     && make \
     && cp /tmp/rar2fs/src/rar2fs /usr/local/bin/rar2fs \
+    && echo "#!/bin/bash" >> /usr/local/bin/start_all.sh
+    && echo "/usr/local/bin/rar2fs -o ro,allow_other -o auto_unmount --seek-length=1 /nomorerar /data" >> /usr/local/bin/start_all.sh
+    && echo "sleep 99999999999" >> /usr/local/bin/start_all.sh
+    && chmod 755 /usr/local/bin/start_all.sh
 # Add  plex user
     && useradd -U -d /config -s /bin/false plex \
     && usermod -G users plex \
@@ -55,5 +59,5 @@ RUN apt update \
     && rm -rf /etc/default/plexmediaserver/*
 
 EXPOSE 32400/tcp 3005/tcp 8324/tcp 32469/tcp 1900/udp 32410/udp 32412/udp 32413/udp 32414/udp
-CMD /usr/local/bin/rar2fs -f -o ro,allow_other -o auto_unmount --seek-length=1 /nomorerar /data; sleep 999999999999
+CMD ["/usr/local/bin/start_all.sh"]
 VOLUME /config /transcode /nomorerar
