@@ -17,6 +17,8 @@ ENV DEBIAN_FRONTEND=noninteractive \
 ENTRYPOINT ["/init"]
 
 # Update and get dependencies
+COPY start_all.sh /usr/local/bin/start_all.sh
+
 RUN apt update \
     && apt upgrade -y \
     && apt install -y avahi-daemon dbus xmlstarlet uuid-runtime curl libfuse-dev g++ make fuse \
@@ -36,9 +38,6 @@ RUN apt update \
     && ./configure --with-unrar=/tmp/unrar --with-unrar-lib=/usr/lib/ \
     && make \
     && cp /tmp/rar2fs/src/rar2fs /usr/local/bin/rar2fs \
-    && echo "#!/bin/bash" >> /usr/local/bin/start_all.sh \
-    && echo "/usr/local/bin/rar2fs -o ro,allow_other -o auto_unmount --seek-length=1 /nomorerar /data" >> /usr/local/bin/start_all.sh \
-    && echo "/usr/lib/plexmediaserver/lib/Plex\ Media\ Server" >> /usr/local/bin/start_all.sh \
     && chmod 755 /usr/local/bin/start_all.sh \
 # Add  plex user
     && useradd -U -d /config -s /bin/false plex \
