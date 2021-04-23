@@ -17,7 +17,6 @@ ENV DEBIAN_FRONTEND=noninteractive \
 ENTRYPOINT ["/init"]
 
 # Update and get dependencies
-COPY start_all.sh /usr/local/bin/start_all.sh
 
 RUN apt update \
     && apt upgrade -y \
@@ -38,7 +37,6 @@ RUN apt update \
     && ./configure --with-unrar=/tmp/unrar --with-unrar-lib=/usr/lib/ \
     && make \
     && cp /tmp/rar2fs/src/rar2fs /usr/local/bin/rar2fs \
-    && chmod 755 /usr/local/bin/start_all.sh \
 # Add  plex user
     && useradd -U -d /config -s /bin/false plex \
     && usermod -G users plex \
@@ -56,6 +54,9 @@ RUN apt update \
     && rm -rf /tmp/* \
     && rm -rf /var/tmp/* \
     && rm -rf /etc/default/plexmediaserver/*
+    
+COPY start_all.sh /usr/local/bin/start_all.sh
+RUN chmod 775 /usr/local/bin/start_all.sh
 
 EXPOSE 32400/tcp 3005/tcp 8324/tcp 32469/tcp 1900/udp 32410/udp 32412/udp 32413/udp 32414/udp
 CMD ["/usr/local/bin/start_all.sh"]
