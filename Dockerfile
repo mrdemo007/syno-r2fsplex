@@ -46,7 +46,7 @@ RUN apt update \
     && apt -y remove gcc make curl manpages libc-dev-bin libsepol1-dev linux-libc-dev geoip-database  \
     && apt -y autoremove \
     && apt -y clean \
-    && rm -rf /var/lib/apt/lists/* \ 
+    && rm -rf /var/lib/apt/lists/* \
     && rm -rf /tmp/* \
     && rm -rf /var/tmp/* \
     && rm -rf /etc/default/plexmediaserver/* \
