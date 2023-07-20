@@ -1,12 +1,12 @@
-# builddate 20220414-1
-FROM ubuntu:18.04
+# builddate 20230720-1
+FROM ubuntu:22.04
 
-ARG RAR_VERSION=6.1.1
-ARG RAR2FS_VERSION=1.29.5
-ARG S6_OVERLAY_VERSION=3.1.0.1
+ARG RAR_VERSION=6.2.2
+ARG RAR2FS_VERSION=1.29.6
+ARG S6_OVERLAY_VERSION=3.1.3.0
 ARG PLEX_INSTALL=https://plex.tv/downloads/latest/1?channel=8&build=linux-ubuntu-x86_64&distro=ubuntu
 ENV DEBIAN_FRONTEND=noninteractive \
-    VERSION=20220414-1 \
+    VERSION=20230720-1 \
     PLEX_MEDIA_SERVER_HOME="/usr/lib/plexmediaserver" \
     PLEX_MEDIA_SERVER_APPLICATION_SUPPORT_DIR="/config/Library/Application Support" \
     PLEX_MEDIA_SERVER_INFO_DEVICE=docker \
