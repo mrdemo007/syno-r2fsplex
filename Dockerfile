@@ -22,7 +22,7 @@ RUN apt update \
     && apt install -y avahi-daemon dbus xmlstarlet uuid-runtime curl libfuse-dev g++ make fuse \
 # Execute build rar2fs
     && mkdir -p /tmp/unrar/ \
-    && curl -SL https://www.rarlab.com/rar/unrarsrc-$RAR_VERSION.tar.gz \
+    && curl -SL https://www.rarlab.com/rar/unrarsrc-6.2.2.tar.gz \
     | tar -xzC /tmp \
     && make -C /tmp/unrar lib \
     && make -C /tmp/unrar install-lib \
