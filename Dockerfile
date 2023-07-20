@@ -42,6 +42,9 @@ RUN apt update \
     && dpkg -i /tmp/plex/plexserver.deb \
 # Setup directories
     && mkdir -p /config /transcode /data /nomorerar \
+# Setup scripts
+    && curl -o /usr/local/bin/start_all.sh -SL https://raw.githubusercontent.com/mrdemo007/syno-r2fsplex/master/start_all.sh  \
+    && chmod 775 /usr/local/bin/start_all.sh
 # Cleanup
     && apt -y remove gcc make curl manpages libc-dev-bin libsepol1-dev linux-libc-dev geoip-database  \
     && apt -y autoremove \
@@ -49,9 +52,8 @@ RUN apt update \
     && rm -rf /var/lib/apt/lists/* \
     && rm -rf /tmp/* \
     && rm -rf /var/tmp/* \
-    && rm -rf /etc/default/plexmediaserver/* \
-    && curl -o /usr/local/bin/start_all.sh -SL https://raw.githubusercontent.com/mrdemo007/syno-r2fsplex/master/start_all.sh  \
-    && chmod 775 /usr/local/bin/start_all.sh
+    && rm -rf /etc/default/plexmediaserver/*
+
 
 EXPOSE 32400/tcp 3005/tcp 8324/tcp 32469/tcp 1900/udp 32410/udp 32412/udp 32413/udp 32414/udp
 CMD ["/usr/local/bin/start_all.sh"]
