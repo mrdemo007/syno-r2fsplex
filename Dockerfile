@@ -3,7 +3,6 @@ FROM ubuntu:22.04
 
 ARG RAR_VERSION=6.2.2
 ARG RAR2FS_VERSION=1.29.6
-ARG S6_OVERLAY_VERSION=3.1.3.0
 ARG PLEX_INSTALL=https://plex.tv/downloads/latest/1?channel=8&build=linux-ubuntu-x86_64&distro=ubuntu
 ENV DEBIAN_FRONTEND=noninteractive \
     VERSION=20230720-1 \
@@ -21,9 +20,6 @@ ENTRYPOINT ["/init"]
 RUN apt update \
     && apt upgrade -y \
     && apt install -y avahi-daemon dbus xmlstarlet uuid-runtime curl libfuse-dev g++ make fuse \
-# Install S6 overlay
-    && curl -SL https://github.com/just-containers/s6-overlay/releases/download/v$S6_OVERLAY_VERSION/s6-overlay-amd64.tar.gz \
-    | tar xzC / \
 # Execute build rar2fs
     && mkdir -p /tmp/unrar/ \
     && curl -SL https://www.rarlab.com/rar/unrarsrc-$RAR_VERSION.tar.gz \
