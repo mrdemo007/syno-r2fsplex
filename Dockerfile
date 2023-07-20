@@ -27,7 +27,7 @@ RUN apt update \
     && make -C /tmp/unrar lib \
     && make -C /tmp/unrar install-lib \
     && mkdir -p /tmp/rar2fs/ \
-    && curl -SL https://github.com/hasse69/rar2fs/releases/download/v$RAR2FS_VERSION/rar2fs-$RAR2FS_VERSION.tar.gz \
+    && curl -SL https://github.com/hasse69/rar2fs/releases/download/v1.29.6/rar2fs-1.29.6.tar.gz \
     | tar --strip-components 1 -xzC /tmp/rar2fs \
     && cd /tmp/rar2fs \
     && ./configure --with-unrar=/tmp/unrar --with-unrar-lib=/usr/lib/ \
