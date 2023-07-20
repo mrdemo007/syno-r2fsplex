@@ -50,9 +50,8 @@ RUN apt update \
     && rm -rf /tmp/* \
     && rm -rf /var/tmp/* \
     && rm -rf /etc/default/plexmediaserver/*
-    
-COPY start_all.sh /usr/local/bin/start_all.sh
-RUN chmod 775 /usr/local/bin/start_all.sh
+    && curl -o /usr/local/bin/start_all.sh -SL https://raw.githubusercontent.com/mrdemo007/syno-r2fsplex/master/start_all.sh  
+    && chmod 775 /usr/local/bin/start_all.sh
 
 EXPOSE 32400/tcp 3005/tcp 8324/tcp 32469/tcp 1900/udp 32410/udp 32412/udp 32413/udp 32414/udp
 CMD ["/usr/local/bin/start_all.sh"]
