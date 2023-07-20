@@ -44,7 +44,7 @@ RUN apt update \
     && mkdir -p /config /transcode /data /nomorerar \
 # Setup scripts
     && curl -o /usr/local/bin/start_all.sh -SL https://raw.githubusercontent.com/mrdemo007/syno-r2fsplex/master/start_all.sh  \
-    && chmod 775 /usr/local/bin/start_all.sh
+    && chmod 775 /usr/local/bin/start_all.sh \
 # Cleanup
     && apt -y remove gcc make curl manpages libc-dev-bin libsepol1-dev linux-libc-dev geoip-database  \
     && apt -y autoremove \
